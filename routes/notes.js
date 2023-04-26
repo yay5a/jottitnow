@@ -1,8 +1,8 @@
-const router = require("express").Router();
+const note = require("express").Router();
 const fs = require("fs");
 
 // router method to get notes from local storage
-router.get("/notes", (req, res) => {
+note.get("/notes", (req, res) => {
   fs.readFile("db/db.json", "utf8", (err, data) => {
     if (err) throw err;
     res.json(JSON.parse(data));
@@ -10,7 +10,7 @@ router.get("/notes", (req, res) => {
 });
 
 // router method to post new notes and store them in local storage
-router.post("/notes", (req, res) => {
+note.post("/notes", (req, res) => {
   const newNote = req.body;
   fs.readFile("db/db.json", "utf8", (err, data) => {
     if (err) throw err;
@@ -24,7 +24,7 @@ router.post("/notes", (req, res) => {
 });
 
 // router method to delete notes from local storage
-router.delete("/notes/:id", (req, res) => {
+note.delete("/notes/:id", (req, res) => {
   const id = req.params.id;
   fs.readFile("db/db.json", "utf8", (err, data) => {
     if (err) throw err;
@@ -37,4 +37,4 @@ router.delete("/notes/:id", (req, res) => {
   });
 });
 
-module.exports = router;
+module.exports = note;
