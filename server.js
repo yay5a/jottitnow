@@ -1,5 +1,6 @@
 const express = require('express');
-const fs = require('fs');
+const path = require('path');
+const notesRouter = require('./routes/notes.js');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -8,6 +9,9 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
+
+// Direct notesRouter onto /api
+app.use('/api', notesRouter);
 
 // GET homepage to jott notes
 app.get('*', (req, res) => {

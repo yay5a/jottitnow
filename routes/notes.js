@@ -1,16 +1,18 @@
-const notes = require('express').Router();
+const express = require('express').Router();
+const notes = express.Router();
 const fs = require('fs');
 
-// router method to get notes from local storage
-notes.get('/notes', (req, res) => {
+// GET route to display notes
+notes.get('/api/notes', (req, res) => {
   fs.readFile('db/db.json', 'utf8', (err, data) => {
     if (err) throw err;
+
     res.json(JSON.parse(data));
   });
 });
 
-// Post route to jott new notes and store them in local storage
-notes.post('/notes', (req, res) => {
+// POST route to jott new notes and store them in local storage
+notes.post('/api/notes', (req, res) => {
   const newNote = req.body;
   fs.readFile('db/db.json', 'utf8', (err, data) => {
     if (err) throw err;
@@ -23,8 +25,8 @@ notes.post('/notes', (req, res) => {
   });
 });
 
-// Delete route to delete notes
-notes.delete('/notes/:id', (req, res) => {
+// DELETE route to delete notes
+notes.delete('/api/notes/:id', (req, res) => {
   const id = req.params.id;
   fs.readFile('db/db.json', 'utf8', (err, data) => {
     if (err) throw err;
