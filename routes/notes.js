@@ -2,13 +2,12 @@ const express = require('express').Router();
 const notes = express.route();
 const fs = require('fs');
 
-// GET route to display notes
+// GET route to display notes on homepage
 notes.get('/api/notes', (req, res) => {
-  const notes = req.body;
   fs.readFile('db/db.json', 'utf8', (err, data) => {
     if (err) throw err;
-    console.log(err)
-    res.json(JSON.parse(notes.JSONdata));
+    const jott = JSON.parse(data);
+    res.json(jott);
   });
 });
 
