@@ -14,7 +14,7 @@ app.use(express.static('public'));
 app.use('/api', notesRouter);
 
 // GET homepage to jott notes
-app.get('*', (req, res) => {
+app.get('/public', (req, res) => {
     res.sendFile(path.join(__dirname, './public/index.html'));
 });
 
