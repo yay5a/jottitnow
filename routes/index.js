@@ -1,11 +1,14 @@
-const express = require('express');
+const path = require('path');
+const router = require('express').Router();
 
-// Importing modular route for notes
-const notesRouter = require('./notes');
+// GET homepage to jott notes
+router.get('/public', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/jott.html'));
+});
 
-const app = express(notesRouter);
+// '*' wildcard route to index.html
+router.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+});
 
-// Initializing notes route
-app.use('/notes', notesRouter);
-
-module.exports = app;
+module.exports = router;
