@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const htmlRoutes = require('./routes/htmlRoutes');
 const jottRoutes = require('./routes/jottRoutes');
 
@@ -10,19 +9,9 @@ const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
+app.use('/jott', jottRoutes);
+app.use('/', htmlRoutes);
 
-// Direct notesRouter onto /api
-app.use('/api', notesRouter);
-
-// GET homepage to jott notes
-app.get('/public', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/index.html'));
-});
-
-// GET notes page to jott notes
-app.get('/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/notes.html'));
-});
 
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
 

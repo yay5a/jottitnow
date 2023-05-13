@@ -1,0 +1,25 @@
+{
+  "name": "jottitnow",
+  "version": "1.0.0",
+  "description": "note taking application that allows the user to create, save, and delete notes",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Chartok?jottitnow"
+  },
+  "keywords": [
+    "note",
+    "taker",
+    "jott"
+  ],
+  "author": "Mohammed 'Asad' 'Chartok' 'Yaysa' Bhimjee",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "uuid": "^9.0.0"
+  }
+}
