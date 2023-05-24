@@ -23,7 +23,7 @@ const hide = (elem) => {
 };
 
 // activeNote is used to keep track of the note in the textarea
-let activeNote = {};
+let activeJott = {};
 
 const getJotts = () =>
   fetch('/routes/jottRoutes', {
@@ -53,11 +53,11 @@ const deleteJott = (id) =>
 const renderActiveJotts = () => {
   hide(saveNoteBtn);
 
-  if (activeNote.id) {
+  if (activeJott.id) {
     noteTitle.setAttribute('readonly', true);
     noteText.setAttribute('readonly', true);
-    noteTitle.value = activeNote.title;
-    noteText.value = activeNote.text;
+    noteTitle.value = activeJott.title;
+    noteText.value = activeJott.text;
   } else {
     noteTitle.removeAttribute('readonly');
     noteText.removeAttribute('readonly');
@@ -85,8 +85,8 @@ const handleJottDelete = (e) => {
   const jott = e.target;
   const jottId = JSON.parse(jott.parentElement.getAttribute('data-note')).id;
 
-  if (activeNote.id === jottId) {
-    activeNote = {};
+  if (activeJott.id === jottId) {
+    activeJott = {};
   }
 
   deleteJott(jottId).then(() => {
@@ -104,7 +104,7 @@ const handleJottView = (e) => {
 
 // Sets the activeNote to and empty object and allows the user to enter a new note
 const handleNewJottView = (e) => {
-  activeNote = {};
+  activeJott = {};
   renderActiveJotts();
 };
 
