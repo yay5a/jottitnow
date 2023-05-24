@@ -1,5 +1,5 @@
 const express = require('express');
-const htmlRoutes = require('./routes/index.js');
+const indexRoutes = require('./routes/indexRoutes');
 const jottRoutes = require('./routes/jottRoutes');
 
 const app = express();
@@ -10,9 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 app.use('/jott', jottRoutes);
-app.use('/', index.js);
+app.use('/', indexRoutes);
 
 
 app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
-
-console.log(err);
