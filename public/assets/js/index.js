@@ -33,7 +33,7 @@ const getJotts = () =>
     },
   });
 
-const saveNote = (jott) =>
+const saveJott = (jott) =>
   fetch('/routes/jottRoutes', {
     method: 'POST',
     headers: {
@@ -42,7 +42,7 @@ const saveNote = (jott) =>
     body: JSON.stringify(jott),
   });
 
-const deleteNote = (id) =>
+const deleteJott = (id) =>
   fetch(`/routes/jottRoutes/${id}`, {
     method: 'DELETE',
     headers: {
@@ -50,7 +50,7 @@ const deleteNote = (id) =>
     },
   });
 
-const renderActiveNote = () => {
+const renderActiveJotts = () => {
   hide(saveNoteBtn);
 
   if (activeNote.id) {
@@ -66,46 +66,46 @@ const renderActiveNote = () => {
   }
 };
 
-const handleNoteSave = () => {
-  const newNote = {
+const handleJottSave = () => {
+  const newJott = {
     title: noteTitle.value,
     text: noteText.value,
   };
-  saveNote(newNote).then(() => {
-    getAndRenderNotes();
-    renderActiveNote();
+  saveJott(newJott).then(() => {
+    getAndRenderJotts();
+    renderActiveJotts();
   });
 };
 
 // Delete the clicked note
-const handleNoteDelete = (e) => {
+const handleJottDelete = (e) => {
   // Prevents the click listener for the list from being called when the button inside of it is clicked
   e.stopPropagation();
 
-  const note = e.target;
-  const noteId = JSON.parse(note.parentElement.getAttribute('data-note')).id;
+  const jott = e.target;
+  const jottId = JSON.parse(jott.parentElement.getAttribute('data-note')).id;
 
-  if (activeNote.id === noteId) {
+  if (activeNote.id === jottId) {
     activeNote = {};
   }
 
-  deleteNote(noteId).then(() => {
-    getAndRenderNotes();
-    renderActiveNote();
+  deleteJott(jottId).then(() => {
+    getAndRenderJotts();
+    renderActiveJotts();
   });
 };
 
 // Sets the activeNote and displays it
-const handleNoteView = (e) => {
+const handleJottView = (e) => {
   e.preventDefault();
-  activeNote = JSON.parse(e.target.parentElement.getAttribute('data-note'));
-  renderActiveNote();
+  activeJott = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+  renderActiveJotts();
 };
 
 // Sets the activeNote to and empty object and allows the user to enter a new note
-const handleNewNoteView = (e) => {
+const handleNewJottView = (e) => {
   activeNote = {};
-  renderActiveNote();
+  renderActiveJotts();
 };
 
 const handleRenderSaveBtn = () => {
@@ -117,13 +117,13 @@ const handleRenderSaveBtn = () => {
 };
 
 // Render the list of note titles
-const renderNoteList = async (notes) => {
-  let jsonNotes = await notes.json();
-  if (window.location.pathname === '/notes') {
-    noteList.forEach((el) => (el.innerHTML = ''));
+const renderJottList = async (jotts) => {
+  let jsonJotts = await jotts.json();
+  if (window.location.pathname === '/jott') {
+    jottList.forEach((el) => (el.innerHTML = ''));
   }
 
-  let noteListItems = [];
+  let jottListItems = [];
 
   // Returns HTML element with or without a delete button
   const createLi = (text, delBtn = true) => {
@@ -133,7 +133,7 @@ const renderNoteList = async (notes) => {
     const spanEl = document.createElement('span');
     spanEl.classList.add('list-item-title');
     spanEl.innerText = text;
-    spanEl.addEventListener('click', handleNoteView);
+    spanEl.addEventListener('click', handleJottView);
 
     liEl.append(spanEl);
 
@@ -146,7 +146,7 @@ const renderNoteList = async (notes) => {
         'text-danger',
         'delete-note'
       );
-      delBtnEl.addEventListener('click', handleNoteDelete);
+      delBtnEl.addEventListener('click', handleJottDelete);
 
       liEl.append(delBtnEl);
     }
