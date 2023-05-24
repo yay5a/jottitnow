@@ -5,7 +5,7 @@ body {
   padding: 0;
 }
 
-.save-note {
+.save-jott {
   display: none;
 }
 
@@ -16,28 +16,28 @@ body {
   cursor: pointer;
 }
 
-.note-textarea,
-.note-title {
+.jott-textarea,
+.jott-title {
   color: #000000;
   width: 100%;
   outline: none;
   border: none;
 }
 
-.note-textarea {
+.jott-textarea {
   resize: none;
   height: calc(100% - 63px);
   padding-top: 15px;
 }
 
-.note-title {
+.jott-title {
   height: 50px;
   margin-top: 13px;
   font-size: 3rem;
 }
 
-.note-title:read-only,
-.note-textarea:read-only {
+.jott-title:read-only,
+.jott-textarea:read-only {
   color: #757575;
 }
 
