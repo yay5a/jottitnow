@@ -155,29 +155,29 @@ const renderJottList = async (jotts) => {
   };
 
   if (jsonNotes.length === 0) {
-    noteListItems.push(createLi('No saved Notes', false));
+    jottListItems.push(createLi('No saved Jotts', false));
   }
 
-  jsonNotes.forEach((note) => {
+  jsonJotts.forEach((jott) => {
     const li = createLi(note.title);
-    li.dataset.note = JSON.stringify(note);
+    li.dataset.jott = JSON.stringify(jott);
 
-    noteListItems.push(li);
+    jottListItems.push(li);
   });
 
-  if (window.location.pathname === '/notes') {
-    noteListItems.forEach((note) => noteList[0].append(note));
+  if (window.location.pathname === '/jott') {
+    jottListItems.forEach((jott) => jottList[0].append(jott));
   }
 };
 
 // Gets notes from the db and renders them to the sidebar
-const getAndRenderNotes = () => getNotes().then(renderNoteList);
+const getAndRenderJotts = () => getJotts().then(renderJottList);
 
-if (window.location.pathname === '/notes') {
-  saveNoteBtn.addEventListener('click', handleNoteSave);
-  newNoteBtn.addEventListener('click', handleNewNoteView);
+if (window.location.pathname === '/jott') {
+  saveNoteBtn.addEventListener('click', handleJottSave);
+  newNoteBtn.addEventListener('click', handleNewJottView);
   noteTitle.addEventListener('keyup', handleRenderSaveBtn);
   noteText.addEventListener('keyup', handleRenderSaveBtn);
 }
 
-getAndRenderNotes();
+getAndRenderJotts();
