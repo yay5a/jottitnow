@@ -2,7 +2,7 @@ const util = require('util');
 const fs = require('fs');
 
 const uuidv1 = require('uuid/v1');
-const { parse } = require('path');
+// const { parse } = require('path');
 
 const rFileAsync = util.promisify(fs.readFile);
 const wFileAsync = util.promisify(fs.writeFile);
@@ -19,11 +19,14 @@ class Store {
     getJotts() {
         return this.read().then((jotts) => {
             let parsedJotts;
+
             try {
                 parsedJotts = [].concat(JSON.parse(jotts));
             } catch (err) {
                 parsedJotts = [];
             }
+
+            return parsedJotts;
         });
     }
 
@@ -31,7 +34,7 @@ class Store {
         const { title, text } = jott;
 
         if (!title || !text) {
-            throw new Error("Note 'title' and 'text' cannot be blank");
+            throw new Error("Jott 'title' and 'text' cannot be blank");
         }
 
         const newJott = { title, text, id: uuidv1() };
@@ -42,7 +45,7 @@ class Store {
             .then(() => newJott);
     }
 
-    removeJott(id) {
+    async removeJott(id) {
         return this.getJotts()
             .then((jotts) => jotts.filter((jott) => jott.id !== id))
             .then((filteredJotts) => this.write(filteredJotts));
