@@ -15,7 +15,7 @@ router.get('/jott', (req, res) => {
 router.post('/jott', (req, res) => {
   store
     .addNotes(req.body)
-    .then((jott) => res.json(jott))
+    .then((jott) => res.json())
     .catch((err) => res.status(500).json(err));
 });
 

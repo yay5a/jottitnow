@@ -1,15 +1,15 @@
-let noteTitle;
-let noteText;
-let saveNoteBtn;
-let newNoteBtn;
-let noteList;
+let jottTitle;
+let jottText;
+let savejottBtn;
+let newjottBtn;
+let jottList;
 
 if (window.location.pathname === '/jott') {
-  noteTitle = document.querySelector('.note-title');
-  noteText = document.querySelector('.note-textarea');
-  saveNoteBtn = document.querySelector('.save-note');
-  newNoteBtn = document.querySelector('.new-note');
-  noteList = document.querySelectorAll('.list-container .list-group');
+  jottTitle = document.querySelector('.jott-title');
+  jottText = document.querySelector('.jott-textarea');
+  savejottBtn = document.querySelector('.save-jott');
+  newjottBtn = document.querySelector('.new-jott');
+  jottList = document.querySelectorAll('.list-container .list-group');
 }
 
 // Show an element
@@ -22,7 +22,7 @@ const hide = (elem) => {
   elem.style.display = 'none';
 };
 
-// activeNote is used to keep track of the note in the textarea
+// activejott is used to keep track of the jott in the textarea
 let activeJott = {};
 
 const getJotts = () =>
@@ -51,25 +51,25 @@ const deleteJott = (id) =>
   });
 
 const renderActiveJotts = () => {
-  hide(saveNoteBtn);
+  hide(savejottBtn);
 
   if (activeJott.id) {
-    noteTitle.setAttribute('readonly', true);
-    noteText.setAttribute('readonly', true);
-    noteTitle.value = activeJott.title;
-    noteText.value = activeJott.text;
+    jottTitle.setAttribute('readonly', true);
+    jottText.setAttribute('readonly', true);
+    jottTitle.value = activeJott.title;
+    jottText.value = activeJott.text;
   } else {
-    noteTitle.removeAttribute('readonly');
-    noteText.removeAttribute('readonly');
-    noteTitle.value = '';
-    noteText.value = '';
+    jottTitle.removeAttribute('readonly');
+    jottText.removeAttribute('readonly');
+    jottTitle.value = '';
+    jottText.value = '';
   }
 };
 
 const handleJottSave = () => {
   const newJott = {
-    title: noteTitle.value,
-    text: noteText.value,
+    title: jottTitle.value,
+    text: jottText.value,
   };
   saveJott(newJott).then(() => {
     getAndRenderJotts();
@@ -77,13 +77,13 @@ const handleJottSave = () => {
   });
 };
 
-// Delete the clicked note
+// Delete the clicked jott
 const handleJottDelete = (e) => {
   // Prevents the click listener for the list from being called when the button inside of it is clicked
   e.stopPropagation();
 
   const jott = e.target;
-  const jottId = JSON.parse(jott.parentElement.getAttribute('data-note')).id;
+  const jottId = JSON.parse(jott.parentElement.getAttribute('data-jott')).id;
 
   if (activeJott.id === jottId) {
     activeJott = {};
@@ -95,28 +95,28 @@ const handleJottDelete = (e) => {
   });
 };
 
-// Sets the activeNote and displays it
+// Sets the activejott and displays it
 const handleJottView = (e) => {
   e.preventDefault();
-  activeJott = JSON.parse(e.target.parentElement.getAttribute('data-note'));
+  activeJott = JSON.parse(e.target.parentElement.getAttribute('data-jott'));
   renderActiveJotts();
 };
 
-// Sets the activeNote to and empty object and allows the user to enter a new note
+// Sets the activejott to and empty object and allows the user to enter a new jott
 const handleNewJottView = (e) => {
   activeJott = {};
   renderActiveJotts();
 };
 
 const handleRenderSaveBtn = () => {
-  if (!noteTitle.value.trim() || !noteText.value.trim()) {
-    hide(saveNoteBtn);
+  if (!jottTitle.value.trim() || !jottText.value.trim()) {
+    hide(savejottBtn);
   } else {
-    show(saveNoteBtn);
+    show(savejottBtn);
   }
 };
 
-// Render the list of note titles
+// Render the list of jott titles
 const renderJottList = async (jotts) => {
   let jsonJotts = await jotts.json();
   if (window.location.pathname === '/jott') {
@@ -144,7 +144,7 @@ const renderJottList = async (jotts) => {
         'fa-trash-alt',
         'float-right',
         'text-danger',
-        'delete-note'
+        'delete-jott'
       );
       delBtnEl.addEventListener('click', handleJottDelete);
 
@@ -154,12 +154,12 @@ const renderJottList = async (jotts) => {
     return liEl;
   };
 
-  if (jsonNotes.length === 0) {
+  if (jsonJotts.length === 0) {
     jottListItems.push(createLi('No saved Jotts', false));
   }
 
   jsonJotts.forEach((jott) => {
-    const li = createLi(note.title);
+    const li = createLi(jott.title);
     li.dataset.jott = JSON.stringify(jott);
 
     jottListItems.push(li);
@@ -170,14 +170,13 @@ const renderJottList = async (jotts) => {
   }
 };
 
-// Gets notes from the db and renders them to the sidebar
-const getAndRenderJotts = () => getJotts().then(renderJottList);
+// Gets Jotts from the db and renders them to the sidebar const getAndRenderJotts = () => getJotts().then(renderJottList);
 
 if (window.location.pathname === '/jott') {
-  saveNoteBtn.addEventListener('click', handleJottSave);
-  newNoteBtn.addEventListener('click', handleNewJottView);
-  noteTitle.addEventListener('keyup', handleRenderSaveBtn);
-  noteText.addEventListener('keyup', handleRenderSaveBtn);
+  savejottBtn.addEventListener('click', handleJottSave);
+  newjottBtn.addEventListener('click', handleNewJottView);
+  jottTitle.addEventListener('keyup', handleRenderSaveBtn);
+  jottText.addEventListener('keyup', handleRenderSaveBtn);
 }
 
 getAndRenderJotts();
