@@ -66,7 +66,7 @@ const renderActiveJotts = () => {
   }
 };
 
-const handleJottSave = () => {
+const handleJottSave = (saveJott) => {
   const newJott = {
     title: jottTitle.value,
     text: jottText.value,
