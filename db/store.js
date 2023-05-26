@@ -17,7 +17,7 @@ class Store {
     }
 
     async getJotts() {
-        const jotts = await this.read();
+        const jotts = await this.read(jotts);
         let parsedJotts;
         try {
             parsedJotts = [].concat(JSON.parse(jotts));
