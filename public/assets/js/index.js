@@ -118,7 +118,7 @@ const handleRenderSaveBtn = () => {
 
 // Render the list of jott titles
 async function renderJottList(jotts) {
-  let jsonJotts = await jotts.json(jotts);
+  let jsonJotts = await jotts.json();
   if (window.location.pathname === '/jott') {
     jottList.forEach((el) => (el.innerHTML = ''));
   }
