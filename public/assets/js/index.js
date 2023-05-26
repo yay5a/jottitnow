@@ -117,8 +117,8 @@ const handleRenderSaveBtn = () => {
 };
 
 // Render the list of jott titles
-const renderJottList = async (jotts) => {
-  let jsonJotts = await jotts.json();
+async function renderJottList(jotts) {
+  let jsonJotts = await jotts.json(jotts);
   if (window.location.pathname === '/jott') {
     jottList.forEach((el) => (el.innerHTML = ''));
   }
@@ -168,7 +168,7 @@ const renderJottList = async (jotts) => {
   if (window.location.pathname === '/jott') {
     jottListItems.forEach((jott) => jottList[0].append(jott));
   }
-};
+}
 
 // Gets Jotts from the db and renders them to the sidebar const getAndRenderJotts = () => getJotts().then(renderJottList);
 
