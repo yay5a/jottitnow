@@ -83,7 +83,7 @@ const handleJottDelete = (e) => {
   e.stopPropagation();
 
   const jott = e.target.parentElement;
-  const jottId = JSON.parse(jott.parentElement.getAttribute('data-jott')).id;
+  const jottId = JSON.parse(jott.getAttribute('data-jott')).id;
 
   if (activeJott.id === jottId) {
     activeJott = {};
