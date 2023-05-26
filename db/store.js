@@ -16,18 +16,15 @@ class Store {
         return wFileAsync('db/db.json', JSON.stringify(jott));
     }
 
-    getJotts() {
-        return this.read().then((jotts) => {
-            let parsedJotts;
-
-            try {
-                parsedJotts = [].concat(JSON.parse(jotts));
-            } catch (err) {
-                parsedJotts = [];
-            }
-
-            return parsedJotts;
-        });
+    async getJotts() {
+        const jotts = await this.read();
+        let parsedJotts;
+        try {
+            parsedJotts = [].concat(JSON.parse(jotts));
+        } catch (err) {
+            parsedJotts = [];
+        }
+        return parsedJotts;
     }
 
     addJott(jott) {

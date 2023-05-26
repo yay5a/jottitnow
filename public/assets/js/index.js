@@ -4,7 +4,7 @@ let savejottBtn;
 let newjottBtn;
 let jottList;
 
-if (window.location.pathname === '/jott') {
+if (window.location.pathname === '/jotts') {
   jottTitle = document.querySelector('.jott-title');
   jottText = document.querySelector('.jott-textarea');
   savejottBtn = document.querySelector('.save-jott');
