@@ -39,7 +39,7 @@ const saveJott = (jott) =>
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(jott),
+    body: JSON.stringify(jottTitle, jottText),
   });
 
 const deleteJott = (id) =>
