@@ -172,6 +172,8 @@ const renderJottList = async (jotts) => {
 
 // Gets Jotts from the db and renders them to the sidebar const getAndRenderJotts = () => getJotts().then(renderJottList);
 
+const getAndRenderJotts = () => getJotts().then(renderJottList);
+
 if (window.location.pathname === '/jott') {
   savejottBtn.addEventListener('click', handleJottSave);
   newjottBtn.addEventListener('click', handleNewJottView);
