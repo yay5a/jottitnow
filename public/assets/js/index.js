@@ -39,7 +39,7 @@ const saveJott = (jott) =>
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(jottTitle, jottText),
+    body: JSON.stringify(jott),
   });
 
 const deleteJott = (id) =>
@@ -66,7 +66,7 @@ const renderActiveJotts = () => {
   }
 };
 
-const handleJottSave = (saveJott) => {
+const handleJottSave = () => {
   const newJott = {
     title: jottTitle.value,
     text: jottText.value,
@@ -82,7 +82,7 @@ const handleJottDelete = (e) => {
   // Prevents the click listener for the list from being called when the button inside of it is clicked
   e.stopPropagation();
 
-  const jott = e.target;
+  const jott = e.target.parentElement;
   const jottId = JSON.parse(jott.parentElement.getAttribute('data-jott')).id;
 
   if (activeJott.id === jottId) {
@@ -160,7 +160,7 @@ const renderJottList = async (jotts) => {
 
   jsonJotts.forEach((jott) => {
     const li = createLi(jott.title);
-    li.dataset.jott = JSON.stringify(jott);
+    li.setAttribute('data-jott', JSON.stringify(jott));
 
     jottListItems.push(li);
   });
