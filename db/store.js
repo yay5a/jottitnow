@@ -31,12 +31,12 @@ class Store {
         const { title, text } = jott;
 
         if (!title || !text) {
-            throw new Error("Jott 'title' and 'text' cannot be blank");
+            throw new Error("Cannot be blank!");
         }
 
         const newJott = { title, text, id: uuidv1() };
 
-        return this.getjotts()
+        return this.getJotts()
             .then((jotts) => [...jotts, newJott])
             .then((updatedJotts) => this.write(updatedJotts))
             .then(() => newJott);
