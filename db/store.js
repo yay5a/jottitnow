@@ -2,7 +2,6 @@ const util = require('util');
 const fs = require('fs');
 
 const uuidv1 = require('uuid/v1');
-// const { parse } = require('path');
 
 const rFileAsync = util.promisify(fs.readFile);
 const wFileAsync = util.promisify(fs.writeFile);
@@ -26,6 +25,7 @@ class Store {
             }
             return parsedJotts;
         }
+        );
     }
     addJott(jott) {
         const { title, text } = jott;
