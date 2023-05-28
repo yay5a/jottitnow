@@ -50,7 +50,7 @@ const deleteJott = (id) =>
     },
   });
 
-const renderActiveJotts = () => {
+function renderActiveJotts(activeJott) {
   hide(savejottBtn);
 
   if (activeJott.id) {
@@ -64,9 +64,9 @@ const renderActiveJotts = () => {
     jottTitle.value = '';
     jottText.value = '';
   }
-};
+}
 
-const handleJottSave = () => {
+const handleJottSave = (saveJott) => {
   const newJott = {
     title: jottTitle.value,
     text: jottText.value,

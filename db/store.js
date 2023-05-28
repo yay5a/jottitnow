@@ -19,17 +19,14 @@ class Store {
     getJotts() {
         return this.read().then((jotts) => {
             let parsedJotts;
-
             try {
                 parsedJotts = [].concat(JSON.parse(jotts));
             } catch (err) {
                 parsedJotts = [];
             }
-
             return parsedJotts;
-        });
+        }
     }
-
     addJott(jott) {
         const { title, text } = jott;
 
