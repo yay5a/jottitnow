@@ -110,9 +110,9 @@ const handleNewJottView = (e) => {
 
 const handleRenderSaveBtn = () => {
   if (!jottTitle.value.trim() || !jottText.value.trim()) {
-    hide(savejottBtn);
+    hide(saveJottBtn);
   } else {
-    show(savejottBtn);
+    show(saveJottBtn);
   }
 };
 
