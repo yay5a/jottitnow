@@ -4,7 +4,7 @@ const path = require('path');
 const router = express.Router();
 
 // GET homepage to display jott notes
-router.get('/', (req, res) => {
+router.get('/jotts', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/jotts.html'));
 });
 
