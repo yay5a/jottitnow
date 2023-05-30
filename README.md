@@ -39,4 +39,4 @@ This project is licensed under the MIT license.
 If you have any questions about the repo, open an issue or contact me directly at m.bhimjee@outlook.com 
 
 You can find more of my work at https://github.com/Chartok
-![preview of application](jott-preview.jpg)
+![preview of application](/assets/images/jott-preview.jpg)
