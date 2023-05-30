@@ -26,7 +26,7 @@ const hide = (elem) => {
 let activeJott = {};
 
 const getJotts = () =>
-  fetch('/jott', {
+  fetch('/api/jotts', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ const getJotts = () =>
   });
 
 const saveJott = (jott) =>
-  fetch('/jott', {
+  fetch('api/jotts', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ const saveJott = (jott) =>
   });
 
 const deleteJott = (id) =>
-  fetch(`/jott${id}`, {
+  fetch(`/api/jotts${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
