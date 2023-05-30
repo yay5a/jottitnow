@@ -15,19 +15,17 @@ class Store {
         return wFileAsync('db/db.json', JSON.stringify(jott));
     }
 
-    getJotts() {
-        return this.read().then((jotts) => {
-            let parsedJotts;
-            try {
-                parsedJotts = [].concat(JSON.parse(jotts));
-            } catch (err) {
-                parsedJotts = [];
-            }
-            return parsedJotts;
+    async getJotts() {
+        const jotts = await this.read();
+        let parsedJotts;
+        try {
+            parsedJotts = [].concat(JSON.parse(jotts));
+        } catch (err) {
+            parsedJotts = [];
         }
-        );
+        return parsedJotts;
     }
-    addJott(jott) {
+    async addJott(jott) {
         const { title, text } = jott;
 
         if (!title || !text) {
@@ -36,10 +34,10 @@ class Store {
 
         const newJott = { title, text, id: uuidv1() };
 
-        return this.getJotts()
-            .then((jotts) => [...jotts, newJott])
-            .then((updatedJotts) => this.write(updatedJotts))
-            .then(() => newJott);
+        const jotts = await this.getJotts();
+        const updatedJotts = [...jotts, newJott];
+        await this.write(updatedJotts);
+        return newJott;
     }
 
     async removeJott(id) {
