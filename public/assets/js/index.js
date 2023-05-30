@@ -44,7 +44,7 @@ const saveJott = (jott) =>
   });
 
 const deleteJott = (id) =>
-  fetch(`/api/jotts${id}`, {
+  fetch(`/api/jotts/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
