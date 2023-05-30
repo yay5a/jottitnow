@@ -1,30 +1,35 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
 const store = require('../db/store');
 
-// GET route to display notes on homepage
-router.get('/jotts', (req, res) => {
-  store
-    .getJotts()
-    .then((jotts) => {
-      return res.json(jotts);
-    })
-    .catch((err) => res.status(500).json(err));
+// GET route to display jotts on the homepage
+router.get('/jotts', async (req, res) => {
+  try {
+    const jotts = await store.getJotts();
+    res.json(jotts);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-// POST route to jott new notes and store them in local storage
-router.post('/jotts', (req, res) => {
-  store
-    .addJott(req.body)
-    .then((jott) => res.json(jott))
-    .catch((err) => res.status(500).json(err));
+// POST route to add new jotts and store them
+router.post('/jotts', async (req, res) => {
+  try {
+    const jott = await store.addJott(req.body);
+    res.json(jott);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
-// DELETE route to delete notes
-router.delete('/jotts/:id', (req, res) => {
-  store
-    .removeJott(req.params.id)
-    .then(() => res.json({ ok: true }))
-    .catch((err) => res.status(500).json(err));
+// DELETE route to delete jotts
+router.delete('/jotts/:id', async (req, res) => {
+  try {
+    await store.removeJott(req.params.id);
+    res.json({ ok: true });
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
