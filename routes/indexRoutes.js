@@ -4,8 +4,8 @@ const path = require('path');
 const router = express.Router();
 
 // GET homepage to display jott notes
-router.get('/jotts', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/jotts.html'));
+router.get('/jott', (req, res) => {
+    res.sendFile(path.join(__dirname, '../public/jott.html'));
 });
 
 // Wildcard route to serve index.html for all other routes
