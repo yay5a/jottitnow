@@ -1,35 +1,37 @@
 const util = require('util');
 const fs = require('fs');
-
-const uuidv1 = require('uuid/v1');
-
-const rFileAsync = util.promisify(fs.readFile);
-const wFileAsync = util.promisify(fs.writeFile);
+const { promisify } = util;
+const { readFile, writeFile } = fs.promises;
+const { v1: uuidv1 } = require('uuid');
 
 class Store {
-    read() {
-        return rFileAsync('db/db.json', 'utf8');
+    async read() {
+        try {
+            const jotts = await readFile('db/db.json', 'utf8');
+            return JSON.parse(jotts) || [];
+        } catch (err) {
+            return [];
+        }
     }
 
-    write(jott) {
-        return wFileAsync('db/db.json', JSON.stringify(jott));
+    async write(jotts) {
+        try {
+            await writeFile('db/db.json', JSON.stringify(jotts));
+        } catch (err) {
+            throw new Error('Failed to write jotts to file.');
+        }
     }
 
     async getJotts() {
         const jotts = await this.read();
-        let parsedJotts;
-        try {
-            parsedJotts = [].concat(JSON.parse(jotts));
-        } catch (err) {
-            parsedJotts = [];
-        }
-        return parsedJotts;
+        return Array.isArray(jotts) ? jotts : [];
     }
+
     async addJott(jott) {
         const { title, text } = jott;
 
         if (!title || !text) {
-            throw new Error("Cannot be blank!");
+            throw new Error('Cannot be blank!');
         }
 
         const newJott = { title, text, id: uuidv1() };
@@ -41,9 +43,9 @@ class Store {
     }
 
     async removeJott(id) {
-        return this.getJotts()
-            .then((jotts) => jotts.filter((jott) => jott.id !== id))
-            .then((filteredJotts) => this.write(filteredJotts));
+        const jotts = await this.getJotts();
+        const filteredJotts = jotts.filter((jott) => jott.id !== id);
+        await this.write(filteredJotts);
     }
 }
 
