@@ -74,6 +74,9 @@ const handleJottSave = () => {
   saveJott(newJott).then(() => {
     getAndRenderJotts();
     renderActiveJotts();
+  })
+  .catch ((err) => {
+    console.log(err);
   });
 };
 
