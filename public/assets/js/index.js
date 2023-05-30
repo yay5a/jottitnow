@@ -34,7 +34,7 @@ const getJotts = () =>
   });
 
 const saveJott = (jott) =>
-  fetch('api/jotts', {
+  fetch('/api/jotts', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
