@@ -26,7 +26,7 @@ const hide = (elem) => {
 let activeJott = {};
 
 const getJotts = () =>
-  fetch('./routes/jottRoutes', {
+  fetch('/routes/jottRoutes', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ const getJotts = () =>
   });
 
 const saveJott = (jott) =>
-  fetch('./routes/jottRoutes', {
+  fetch('/routes/jottRoutes', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -43,7 +43,7 @@ const saveJott = (jott) =>
   });
 
 const deleteJott = (id) =>
-  fetch(`./routes/jottRoutes/${id}`, {
+  fetch(`/routes/jottRoutes/${id}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',
