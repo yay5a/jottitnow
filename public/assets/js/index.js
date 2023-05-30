@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', (event) => {
 let jottTitle;
 let jottText;
 let saveJottBtn;
@@ -185,3 +186,5 @@ if (window.location.pathname === '/jotts') {
 }
 
 getAndRenderJotts();
+
+});
