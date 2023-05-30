@@ -3,7 +3,7 @@ const router = express.Router();
 const store = require('../db/store');
 
 // GET route to display jotts on the homepage
-router.get('/jott', async (req, res) => {
+router.get('/jotts', async (req, res) => {
   try {
     const jotts = await store.getJotts();
     res.json(jotts);
@@ -13,7 +13,7 @@ router.get('/jott', async (req, res) => {
 });
 
 // POST route to add new jotts and store them
-router.post('/jott', async (req, res) => {
+router.post('/jotts', async (req, res) => {
   try {
     const jott = await store.addJott(req.body);
     res.json(jott);
@@ -23,7 +23,7 @@ router.post('/jott', async (req, res) => {
 });
 
 // DELETE route to delete jotts
-router.delete('/jott/:id', async (req, res) => {
+router.delete('/jotts/:id', async (req, res) => {
   try {
     await store.removeJott(req.params.id);
     res.json({ ok: true });
